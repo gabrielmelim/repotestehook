@@ -1,5 +1,8 @@
+#! /bin/sh
+# setup-hooks.sh
+
 HOOKS_DIR=".githooks"
-CUSTOM_HOOK_PREFIX="custom-"
+CUSTOM_HOOK_PREFIX="test"
 
 echo "Configurando hooks Git..."
 

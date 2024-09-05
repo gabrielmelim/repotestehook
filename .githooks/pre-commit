@@ -1,0 +1,15 @@
+#! /bin/sh
+# .githooks/pre-commit
+
+# Rodar testes
+echo "Rodando MVN CLEAN INSTALL para validar os testes antes de aprovar o commit."
+mvn clean install
+TEST_RESULT=$?
+
+if [ $TEST_RESULT -ne 0 ]; then
+  echo "Os testes falharam. O commit foi abortado."
+  exit 1
+fi
+
+echo "Os testes passaram. Commit aprovado."
+exit 0

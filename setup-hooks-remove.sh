@@ -1,16 +1,21 @@
-#!/bin/sh
-# remove-custom-hooks.sh
+#! /bin/sh
+# cleanup-hooks.sh
 
-CUSTOM_HOOK_PREFIX="custom-"
+HOOKS_DIR=".git/hooks"
+CUSTOM_HOOK_PREFIX="test"
 
-echo "Removendo hooks personalizados..."
+echo "Removendo hooks Git..."
 
-# Remove apenas os hooks personalizados
-for hook in .git/hooks/${CUSTOM_HOOK_PREFIX}*; do
-  if [ -f "$hook" ]; then
-    echo "Removendo hook: $(basename $hook)"
-    rm $hook
+# Remove os wrappers e scripts com prefixo
+for hook in $HOOKS_DIR/${CUSTOM_HOOK_PREFIX}*; do
+  if [ -e "$hook" ]; then
+    rm "$hook"
   fi
 done
 
-echo "Hooks personalizados removidos com sucesso."
+# Remove os wrappers restantes, se houver
+for hook in $HOOKS_DIR/*; do
+  if [ -e "$hook" ]; then
+    rm "$hook"
+  fi
+done
